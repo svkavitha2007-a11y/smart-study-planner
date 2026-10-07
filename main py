@@ -1,0 +1,46 @@
+print("===== SMART STUDY PLANNER =====")
+
+n = int(input("Enter number of subjects: "))
+
+subjects = []
+
+for i in range(n):
+    data = input("Enter subject, topics, difficulty, hours, completed: ").split()
+
+    name = data[0]
+    topics = int(data[1])
+    difficulty = data[2].lower()
+    hours = float(data[3])
+    completed = int(data[4])
+
+    if difficulty == "hard":
+        priority = 3
+    elif difficulty == "medium":
+        priority = 2
+    else:
+        priority = 1
+
+    hours_per_topic = hours / topics
+    progress = (completed / topics) * 100
+
+    subjects.append([name, topics, difficulty, hours,
+                     completed, priority, hours_per_topic, progress])
+
+print("\n===== STUDY PLAN =====")
+
+for s in subjects:
+    print("\nSubject:", s[0])
+    print("Topics:", s[1])
+    print("Difficulty:", s[2])
+    print("Priority:", s[5])
+    print("Hours per Topic:", round(s[6], 2))
+    print("Progress:", round(s[7], 2), "%")
+
+    if s[7] < 50:
+        print("Recommendation: High focus required")
+    elif s[7] < 80:
+        print("Recommendation: Continue regular study")
+    else:
+        print("Recommendation: Good progress")
+
+print("\nStudy plan generated successfully!")
